@@ -1,6 +1,7 @@
 <?php
 // index.php
 
+// simple dummy data (normally this comes from db)
 $manga_title = "My First Manga";
 
 // total chapters
@@ -10,6 +11,7 @@ $chapters = [
     3 => "Chapter 3 - Big Fight"
 ];
 
+// assume har chapter me 3 pages
 $pages_per_chapter = 3;
 
 // get current chapter from URL (default 1)
@@ -44,6 +46,18 @@ function build_url($chapter, $page)
 {
     return "index.php?chapter=" . $chapter . "&page=" . $page;
 }
+
+// image path banayenge chapter/page ke hisaab se
+$image_file = "pages/chapter-" . $current_chapter . "-page-" . $current_page . ".jpg";
+
+// check kar lein file exist karti hai ya nahi
+if (!file_exists($image_file)) {
+    // agar nahi hai to ek fallback image ya placeholder text use kar sakte hain
+    $image_file = "https://via.placeholder.com/600x800?text=Missing+Image";
+    $is_remote_image = true;
+} else {
+    $is_remote_image = false;
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -72,6 +86,12 @@ function build_url($chapter, $page)
                     </li>
                 <?php } ?>
             </ul>
+
+            <div class="info-box">
+                <p><strong>Image name format:</strong></p>
+                <p>pages/chapter-<em>X</em>-page-<em>Y</em>.jpg</p>
+                <p>Example: chapter-1-page-2.jpg</p>
+            </div>
         </div>
 
         <!-- Main reading area -->
@@ -82,19 +102,21 @@ function build_url($chapter, $page)
             </h2>
 
             <div class="page-area">
-                <img src="https://via.placeholder.com/600x800?text=Chapter+<?php echo $current_chapter; ?>+Page+<?php echo $current_page; ?>" alt="Manga Page">
+                <?php if ($is_remote_image) { ?>
+                    <img src="<?php echo $image_file; ?>" alt="Manga Page (placeholder)">
+                <?php } else { ?>
+                    <img src="<?php echo $image_file; ?>" alt="Manga Page">
+                <?php } ?>
             </div>
 
             <div class="navigation">
 
                 <!-- Previous button -->
                 <?php
-                // previous page in same chapter
                 if ($current_page > 1) {
                     $prev_chapter = $current_chapter;
                     $prev_page = $current_page - 1;
                 } else {
-                    // agar first page hai aur pehle chapter hai, to koi previous nahi
                     if ($current_chapter > 1) {
                         $prev_chapter = $current_chapter - 1;
                         $prev_page = $pages_per_chapter;
@@ -111,12 +133,10 @@ function build_url($chapter, $page)
 
                 <!-- Next button -->
                 <?php
-                // next page in same chapter
                 if ($current_page < $pages_per_chapter) {
                     $next_chapter = $current_chapter;
                     $next_page = $current_page + 1;
                 } else {
-                    // last page of chapter → next chapter ka first page
                     if ($current_chapter < count($chapters)) {
                         $next_chapter = $current_chapter + 1;
                         $next_page = 1;

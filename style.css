@@ -108,3 +108,10 @@ h1 {
     padding: 8px;
     border: 1px solid #eee;
 }
+.info-box {
+    font-size: 12px;
+    margin-top: 15px;
+    padding: 8px;
+    border: 1px solid #eee;
+    background-color: #fafafa;
+}
