@@ -48,7 +48,7 @@ function build_url($chapter, $page)
 }
 
 // image path banayenge chapter/page ke hisaab se
-$image_file = "pages/chapter-" . $current_chapter . "-page-" . $current_page . ".jpg";
+$image_file = "pages/chapter" . $current_chapter . "-page" . $current_page . ".jpg";
 
 // check kar lein file exist karti hai ya nahi
 if (!file_exists($image_file)) {
@@ -86,12 +86,6 @@ if (!file_exists($image_file)) {
                     </li>
                 <?php } ?>
             </ul>
-
-            <div class="info-box">
-                <p><strong>Image name format:</strong></p>
-                <p>pages/chapter-<em>X</em>-page-<em>Y</em>.jpg</p>
-                <p>Example: chapter-1-page-2.jpg</p>
-            </div>
         </div>
 
         <!-- Main reading area -->
