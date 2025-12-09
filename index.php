@@ -1,6 +1,9 @@
 <?php
 // index.php
 
+// session for bookmark
+session_start();
+
 // simple dummy data (normally this comes from db)
 $manga_title = "My First Manga";
 
@@ -39,6 +42,14 @@ if ($current_page < 1) {
 }
 if ($current_page > $pages_per_chapter) {
     $current_page = $pages_per_chapter;
+}
+
+// SAVE BOOKMARK (if user clicked bookmark button)
+if (isset($_GET['bookmark']) && $_GET['bookmark'] == 1) {
+    $_SESSION['bookmark'] = [
+        'chapter' => $current_chapter,
+        'page' => $current_page
+    ];
 }
 
 // helper function to build URL
@@ -86,6 +97,18 @@ if (!file_exists($image_file)) {
                     </li>
                 <?php } ?>
             </ul>
+
+            <!-- Bookmark section (if available) -->
+            <?php if (isset($_SESSION['bookmark'])) {
+                $bm = $_SESSION['bookmark'];
+            ?>
+                <h2>Bookmark</h2>
+                <p>
+                    <a class="btn" href="<?php echo build_url($bm['chapter'], $bm['page']); ?>">
+                        Go to Bookmark (Ch <?php echo $bm['chapter']; ?>, Pg <?php echo $bm['page']; ?>)
+                    </a>
+                </p>
+            <?php } ?>
         </div>
 
         <!-- Main reading area -->
@@ -105,8 +128,8 @@ if (!file_exists($image_file)) {
 
             <div class="navigation">
 
-                <!-- Previous button -->
                 <?php
+                // Previous logic
                 if ($current_page > 1) {
                     $prev_chapter = $current_chapter;
                     $prev_page = $current_page - 1;
@@ -125,8 +148,8 @@ if (!file_exists($image_file)) {
                     <a class="btn" href="<?php echo build_url($prev_chapter, $prev_page); ?>">Previous</a>
                 <?php } ?>
 
-                <!-- Next button -->
                 <?php
+                // Next logic
                 if ($current_page < $pages_per_chapter) {
                     $next_chapter = $current_chapter;
                     $next_page = $current_page + 1;
@@ -144,6 +167,11 @@ if (!file_exists($image_file)) {
                     ?>
                     <a class="btn" href="<?php echo build_url($next_chapter, $next_page); ?>">Next</a>
                 <?php } ?>
+
+                <!-- Bookmark this page button -->
+                <a class="btn" href="<?php echo build_url($current_chapter, $current_page); ?>&bookmark=1">
+                    Bookmark This Page
+                </a>
 
             </div>
         </div>
