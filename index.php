@@ -47,12 +47,9 @@ function build_url($chapter, $page)
     return "index.php?chapter=" . $chapter . "&page=" . $page;
 }
 
-// image path banayenge chapter/page ke hisaab se
 $image_file = "pages/chapter" . $current_chapter . "-page" . $current_page . ".jpg";
 
-// check kar lein file exist karti hai ya nahi
 if (!file_exists($image_file)) {
-    // agar nahi hai to ek fallback image ya placeholder text use kar sakte hain
     $image_file = "https://via.placeholder.com/600x800?text=Missing+Image";
     $is_remote_image = true;
 } else {
