@@ -1,7 +1,6 @@
 <?php
 // index.php
 
-// simple dummy data (normally this comes from db)
 $manga_title = "My First Manga";
 
 // total chapters
@@ -11,7 +10,6 @@ $chapters = [
     3 => "Chapter 3 - Big Fight"
 ];
 
-// assume har chapter me 3 pages
 $pages_per_chapter = 3;
 
 // get current chapter from URL (default 1)
@@ -84,7 +82,6 @@ function build_url($chapter, $page)
             </h2>
 
             <div class="page-area">
-                <!-- Abhi bhi placeholder image hi use kar rahe -->
                 <img src="https://via.placeholder.com/600x800?text=Chapter+<?php echo $current_chapter; ?>+Page+<?php echo $current_page; ?>" alt="Manga Page">
             </div>
 

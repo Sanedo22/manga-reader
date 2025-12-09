@@ -1,3 +1,102 @@
+/* style.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 20px auto;
+    background: #ffffff;
+    padding: 15px;
+    border: 1px solid #ddd;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.layout {
+    display: flex;
+    gap: 10px;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 25%;
+    border-right: 1px solid #ddd;
+    padding-right: 10px;
+}
+
+.sidebar h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin-bottom: 5px;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #333;
+}
+
+.sidebar a:hover {
+    text-decoration: underline;
+}
+
+/* Reader */
+.reader {
+    width: 75%;
+    padding-left: 10px;
+}
+
+.reader h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.page-area {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.page-area img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ccc;
+}
+
+/* Navigation buttons */
+.navigation {
+    text-align: center;
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 15px;
+    border: 1px solid #333;
+    text-decoration: none;
+    color: #333;
+    margin: 0 5px;
+    font-size: 14px;
+}
+
+.btn:hover {
+    background-color: #333;
+    color: #fff;
+}
 .reader h2 {
     font-size: 20px;
     margin-bottom: 10px;
